@@ -80,7 +80,9 @@ class MainWindow(wx.Frame):
 
 
         ''' Logo '''
-        self.img_logo = wx.Image("../Resources/logo.png", wx.BITMAP_TYPE_ANY)
+        cwd = os.getcwd()
+        path = os.path.join(cwd, "Resources", "logo.png")
+        self.img_logo = wx.Image(path, wx.BITMAP_TYPE_ANY)
         self.sb1 = wx.StaticBitmap(self.panel, -1, wx.BitmapFromImage(self.img_logo))
         ''' Text labels '''
 
@@ -168,7 +170,7 @@ class MainWindow(wx.Frame):
         self.SetMaxSize(self.GetSize())
         self.Center()
 
-        self.default_config_path = '../Sorter/config.json'
+        self.default_config_path = os.path.join(cwd, "Sorter", "config.json")
         if os.path.isfile(self.default_config_path):
             config_display_data = self.config.load_config(self.default_config_path)
             self.textbox_download_folder.SetValue(config_display_data["path_downloads"])
